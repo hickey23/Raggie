@@ -1,0 +1,26 @@
+server:
+  port: 8088
+spring:
+  application:
+    name: raggie_takeout
+
+  datasource:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      url: jdbc:mysql://localhost:3306/raggie?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&useSSL=false&allowPublicKeyRetrieval=true
+      username: root
+      password: admin123456
+      type: com.alibaba.druid.pool.DruidDataSource
+
+mybatis-plus:
+  configuration:
+#        address_book------>addressBook
+    #在映射实体或者属性时，将数据库中表名和字段名中的下划线去掉，按照驼峰命名法映射
+    map-underscore-to-camel-case: true
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  global-config:
+    db-config:
+      id-type: ASSIGN_ID
+
+
+raggie:
+  path: /Users/liujiong/Downloads/vs_code_project/raggie_pic/
