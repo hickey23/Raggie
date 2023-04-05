@@ -11,6 +11,11 @@ spring:
       password: admin123456
       type: com.alibaba.druid.pool.DruidDataSource
 
+      redis:
+        host:127.0.0.1
+        port:6379
+        database:0
+
 mybatis-plus:
   configuration:
 #        address_book------>addressBook
