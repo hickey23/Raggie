@@ -45,7 +45,7 @@ public class DishController {
     @PostMapping
 // 那么上述参数可以改为以下形式：@requestBody User user 这种形式会将JSON字符串中的值赋予DishDto中对应的属性上
     public R<String> addDish(@RequestBody DishDto dishDto, DishFlavor dishFlavor, HttpServletRequest request){
-        log.info("获取到到dishDto是：{}",dishDto);
+//        log.info("获取到到dishDto是：{}",dishDto);
 
         dishService.addWithFlavor(dishDto,dishFlavor,request);
         System.out.println("---------------------------------------------");
@@ -55,7 +55,7 @@ public class DishController {
 
     @GetMapping("/page")
     public R<Page> getDish(int page, int pageSize,String name){
-        log.info("page={},pageSize={}",page,pageSize);
+//        log.info("page={},pageSize={}",page,pageSize);
         Page<Dish> dishPageInfo=new Page<>(page,pageSize);
 
         Page<DishDto> dishDtoPageInfo=new Page<>(page,pageSize);
@@ -136,7 +136,7 @@ public class DishController {
 
     @GetMapping("/list")
     public R<List<DishDto>> list(@RequestParam Long categoryId){
-        System.out.println("categoryId::: "+categoryId);
+//        System.out.println("categoryId::: "+categoryId);
 
         //构造查询条件
         QueryWrapper<Dish> queryWrapper=new QueryWrapper<>();

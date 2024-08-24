@@ -24,6 +24,7 @@ import java.util.List;
 
 @Slf4j
 @RestController
+@CrossOrigin("http://localhost:3000")
 @RequestMapping("/employee")
 public class EmployeeControllerByMp {
     @Autowired
@@ -34,11 +35,13 @@ public class EmployeeControllerByMp {
 
     @PostMapping ("/login")
     //通过@requestBody可以将请求体中的JSON字符串绑定到相应的bean上，当然，也可以将其分别绑定到对应的字符串上。
-    public R<Employee> login(@RequestBody Employee employee, HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse){
+    public R<Employee> login(@RequestBody Employee employee, HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws InterruptedException {
         //1.将页面提交的密码进行md5加密处理
         String passwordOrigin=employee.getPassword();
         System.out.println(employee.getUsername()+"  "+employee.getPassword());
         String passwordMD5= DigestUtils.md5DigestAsHex(passwordOrigin.getBytes());
+        System.out.println("passwordMD5:"+passwordMD5);
+
 
 
         //2.根据页面提交的用户名查询数据库
@@ -60,6 +63,9 @@ public class EmployeeControllerByMp {
             //6。登陆成功,将员工id存入session并且返回登陆成功结果
             httpServletRequest.getSession().setAttribute("employee",employee1.getId());
             System.out.println(employee1);
+            //延迟3秒响应数据
+            Thread thread = new Thread();
+            thread.sleep(3000);
             return R.success(employee1);
         }
     }

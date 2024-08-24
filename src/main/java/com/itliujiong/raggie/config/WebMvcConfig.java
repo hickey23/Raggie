@@ -14,7 +14,6 @@ import java.util.List;
 
 @Slf4j
 @Configuration
-
 public class WebMvcConfig extends WebMvcConfigurationSupport {
     //设置静态资源映射
     //classpath对应我们的resource目录

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 //@Component （把普通pojo实例化到spring容器中，相当于配置文件中的 <bean>）
 @Component
+// Mapper是一种对象关系映射（ORM）框架，用于访问数据库中的数据。
 
 /**
  * 添加了@Mapper注解之后这个接口在编译时会生成相应的实现类

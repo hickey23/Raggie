@@ -44,6 +44,7 @@ public class UserController {
             }
             RandomCode=RandomCode*10000;
             String str_num=String.format("%.4f",RandomCode);
+            System.out.println("str_num:::"+str_num);
 
             for (int i = 0; i < str_num.length(); i++) {
                 char item = str_num.charAt(i);
@@ -64,10 +65,7 @@ public class UserController {
             redisTemplate.opsForValue().set(phone,code,5, TimeUnit.MINUTES);
 
             return R.success(code);
-
         }
-
-
         //将生成的验证码保存起来，到session中，用于登陆的对比
         return R.error("手机验证码短信发送失败！！！");
     }
@@ -101,10 +99,10 @@ public class UserController {
             }
             session.setAttribute("user",user.getId());
 
-            //如果用户登陆成功,删除redis中的缓存吗
-            redisTemplate.delete(phone);
-            return R.success(user);
-        }
+        //如果用户登陆成功,删除redis中的缓存吗
+        redisTemplate.delete(phone);
+        return R.success(user);
+    }
 
 
         return R.error("登陆失败！！！");

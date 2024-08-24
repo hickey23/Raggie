@@ -13,7 +13,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     private EmployeeMapper employeeMapper;
     @Override
     public Employee login(Employee employee) {
-        Employee employee1=employeeMapper.login(employee);
-        return employee1;
+        return employeeMapper.login(employee);
+
     }
 }

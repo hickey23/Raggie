@@ -36,57 +36,56 @@ public class SetmealController {
     private SetmealMapper setmealMapper;
 
 
-
     //新增套餐功能
     @PostMapping
-    public R<String> addSetmeal(@RequestBody SetMealDto setMealDto, HttpServletRequest request){
-        log.info("新增套餐为：：： {}",setMealDto);
+    public R<String> addSetmeal(@RequestBody SetMealDto setMealDto, HttpServletRequest request) {
+        log.info("新增套餐为：：： {}", setMealDto);
 
-        setmealService.addWithDish(setMealDto,request);
+        setmealService.addWithDish(setMealDto, request);
         return R.success("新增套餐成功！！！");
     }
 
     @GetMapping("/page")
-    public R<Page> getSetmealPage(@RequestParam int page, int pageSize,String name){
-        System.out.println(page+"  "+pageSize+"  "+name);
+    public R<Page> getSetmealPage(@RequestParam int page, int pageSize, String name) {
+        System.out.println(page + "  " + pageSize + "  " + name);
         //分页构造器
-        Page<Setmeal> setmealPage=new Page<>(page,pageSize);
-        Page<SetMealDto> setMealDtoPage=new Page<>(page,pageSize);
+        Page<Setmeal> setmealPage = new Page<>(page, pageSize);
+        Page<SetMealDto> setMealDtoPage = new Page<>(page, pageSize);
 
 
-        QueryWrapper<Setmeal> queryWrapper=new QueryWrapper<>();
+        QueryWrapper<Setmeal> queryWrapper = new QueryWrapper<>();
         //添加条件查询，根据name进行模糊查询
-        queryWrapper.like(name!=null,"name",name);
+        queryWrapper.like(name != null, "name", name);
         //根据更新时间降序排列
         queryWrapper.orderByDesc("price");
-        setmealService.page(setmealPage,queryWrapper);
+        setmealService.page(setmealPage, queryWrapper);
 
         //这里复制后setMealDtoPage除了records没有，其他的属性都和setmealPage一样
-        BeanUtils.copyProperties(setmealPage,setMealDtoPage,"records");
+        BeanUtils.copyProperties(setmealPage, setMealDtoPage, "records");
 
-        List<Setmeal> allData=setmealPage.getRecords();
+        List<Setmeal> allData = setmealPage.getRecords();
         //新建集合
-        List<SetMealDto> allDataForSetMealDto=new ArrayList<>();
-        System.out.println("@@@allData::"+allData);
-        for (Setmeal setmeal:allData){
-            System.out.println("---------:"+setmeal);
+        List<SetMealDto> allDataForSetMealDto = new ArrayList<>();
+        System.out.println("@@@allData::" + allData);
+        for (Setmeal setmeal : allData) {
+            System.out.println("---------:" + setmeal);
 
-            SetMealDto setMealDto=new SetMealDto();
-            BeanUtils.copyProperties(setmeal,setMealDto);
-            log.info("====setMealDto:::{}",setMealDto);
-            log.info("======setMealDto.get:{}",setMealDto.getId(),setMealDto.getCategoryId());
+            SetMealDto setMealDto = new SetMealDto();
+            BeanUtils.copyProperties(setmeal, setMealDto);
+            log.info("====setMealDto:::{}", setMealDto);
+            log.info("======setMealDto.get:{}", setMealDto.getId(), setMealDto.getCategoryId());
 
 
-            Long categoryId=setmeal.getCategoryId();
-            Category category=categoryService.getById(categoryId);
+            Long categoryId = setmeal.getCategoryId();
+            Category category = categoryService.getById(categoryId);
 
-            log.info("查出来的category是：{}",category);
+            log.info("查出来的category是：{}", category);
 
-            String categoryName=category.getName();
+            String categoryName = category.getName();
             setMealDto.setCategoryName(categoryName);
             allDataForSetMealDto.add(setMealDto);
         }
-        System.out.println("allDataForSetMealDto:"+allDataForSetMealDto);
+        System.out.println("allDataForSetMealDto:" + allDataForSetMealDto);
         setMealDtoPage.setRecords(allDataForSetMealDto);
 
 
@@ -96,8 +95,8 @@ public class SetmealController {
 
     //删除套餐和套餐对应的菜品信息
     @DeleteMapping
-    public R<String> deleteSetmeal(@RequestParam List<Long> ids){
-        System.out.println("ids:"+ids);
+    public R<String> deleteSetmeal(@RequestParam List<Long> ids) {
+        System.out.println("ids:" + ids);
         setmealService.deleteWithDish(ids);
         return null;
     }
@@ -105,9 +104,9 @@ public class SetmealController {
 
     //修改状态，把状态修改为0
     @PostMapping("/status/0")
-    public R<String> stopSell(@RequestParam List<Long> ids){
+    public R<String> stopSell(@RequestParam List<Long> ids) {
         System.out.println("停售处理中-------------");
-        for (Long id:ids){
+        for (Long id : ids) {
             System.out.println(id);
             setmealService.updateStatusZero(id);
         }
@@ -118,9 +117,9 @@ public class SetmealController {
 
     //修改状态，把状态修改为1
     @PostMapping("/status/1")
-    public R<String> startSell(@RequestParam List<Long> ids){
+    public R<String> startSell(@RequestParam List<Long> ids) {
         System.out.println("启售处理中----------------");
-        for (Long id:ids){
+        for (Long id : ids) {
             System.out.println(id);
             setmealService.updateStatusOne(id);
         }
@@ -130,15 +129,15 @@ public class SetmealController {
 
     //根据条件查询套餐数据（移动端）
     @GetMapping("/list")
-    public R<List<Setmeal>> getSetmealForFront(@RequestParam Long categoryId,Integer status){
-        if (categoryId==null && status==null){
+    public R<List<Setmeal>> getSetmealForFront(@RequestParam Long categoryId, Integer status) {
+        if (categoryId == null && status == null) {
             R.error("查询套餐失败！！！");
         }
 
         System.out.println("数据都不为null ！！！");
-        List<Setmeal> setmealList=setmealService.getSetmeal(categoryId,status);
-        System.out.println("setmealList::::"+setmealList);
-        if (setmealList.size()>0 && setmealList!=null){
+        List<Setmeal> setmealList = setmealService.getSetmeal(categoryId, status);
+        System.out.println("setmealList::::" + setmealList);
+        if (setmealList.size() > 0 && setmealList != null) {
             return R.success(setmealList);
         }
 

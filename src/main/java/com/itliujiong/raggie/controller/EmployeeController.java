@@ -19,11 +19,14 @@ import javax.servlet.http.HttpServletResponse;
 //TODO:这个是用mybatis做的登陆
 //TODO:这个是用mybatis做的登陆
 //@Slf4j
-//@RestController
+@RestController
+//@RestController 注解等同于同时使用 @Controller 和 @ResponseBody 注解,简化了控制层的开发。
 //@RequestMapping("/employee")
 public class EmployeeController {
 
-//    EmployeeService employeeService=new EmployeeServiceImpl();
+// EmployeeService employeeService=new EmployeeServiceImpl();
+// @Autowired 注解用于自动注入 EmployeeService 接口的实现类。这是依赖注入的体现,可以让控制器类不需要自己创建 EmployeeService 的实例,
+// 而是由 Spring 容器自动注入。这样可以提高代码的可测试性和可维护性
     @Autowired
     private EmployeeService employeeService;
 
