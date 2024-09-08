@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -27,7 +28,7 @@ public class EmployeeController {
 // EmployeeService employeeService=new EmployeeServiceImpl();
 // @Autowired 注解用于自动注入 EmployeeService 接口的实现类。这是依赖注入的体现,可以让控制器类不需要自己创建 EmployeeService 的实例,
 // 而是由 Spring 容器自动注入。这样可以提高代码的可测试性和可维护性。。。
-    @Autowired
+    @Resource
     private EmployeeService employeeService;
 
     @PostMapping("/login")
