@@ -15,8 +15,11 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EnableTransactionManagement
 public class RaggieApplication {
     public static void main(String[] args) {
+        long startTime = System.currentTimeMillis();
         SpringApplication.run(RaggieApplication.class,args);
         log.info("项目启动成功！！！");
+        long endTime = System.currentTimeMillis();
+        System.out.println("项目启动时间："+(endTime-startTime)+"ms");
         // Employee.say();
         // System.out.println(Employee.num);
     }
