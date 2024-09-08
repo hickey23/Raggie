@@ -20,7 +20,7 @@ import javax.servlet.http.HttpServletResponse;
 //TODO:这个是用mybatis做的登陆
 //@Slf4j
 @RestController
-//@RestController 注解等同于同时使用 @Controller 和 @ResponseBody 注解,简化了控制层的开发。
+//@RestController 注解等同于同时使用 @Controller 和 @ResponseBody 注解,简化了控制层的开发。1
 //@RequestMapping("/employee")
 public class EmployeeController {
 
