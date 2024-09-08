@@ -25,4 +25,9 @@ public class TestExample {
             }
         });
     }
+
+    @Test
+    void test(){
+
+    }
 }

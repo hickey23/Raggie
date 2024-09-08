@@ -42,16 +42,16 @@ public class EmployeeController {
         System.out.println("@@@"+employee1);
 //        由于字符串是对象类型，所以不能 简单的用“==” （双等号）判断两个字符串是否相等，
 //        而使用 equals()方法比较两个对象的内 容。  返回：如果和 String 相等则为 true；否则为 false。
-        System.out.println(passwordMD5==employee1.getPassword());
+        System.out.println(passwordMD5.equals(employee1.getPassword()));
 
         //employee是前端传过来的数据
-        if(employee1!=null && passwordMD5.equals(employee1.getPassword())){
+        if(passwordMD5.equals(employee1.getPassword())){
             System.out.println("登陆成功！！！");
 
             //6。登陆成功,将员工id存入session并且返回登陆成功结果
             httpServletRequest.getSession().setAttribute("employee",employee1.getId());
             return R.success(employee1);
-        } else if (employee1!=null && employee1.getStatus()==0) {
+        } else if (employee1.getStatus() == 0) {
             return R.error("账号已禁用");
 
         } else {
