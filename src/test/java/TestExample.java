@@ -1,6 +1,7 @@
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -44,6 +45,6 @@ public class TestExample {
                 }
             }
         }
-        System.out.println(arr);
+        System.out.println(Arrays.toString(arr.toArray()));
     }
 }
