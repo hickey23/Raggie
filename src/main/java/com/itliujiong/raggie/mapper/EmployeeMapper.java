@@ -19,6 +19,6 @@ import org.springframework.stereotype.Service;
 @Mapper
 public interface EmployeeMapper {
     //登陆
-    @Select("select * from raggie.employee where username=#{username} and password=#{password}")
+    // @Select("select * from raggie.employee where username=#{username} and password=#{password}")
     public Employee login(Employee employee);
 }

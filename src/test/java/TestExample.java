@@ -46,5 +46,6 @@ public class TestExample {
             }
         }
         System.out.println(Arrays.toString(arr.toArray()));
+        System.out.println(arr.stream().sorted().collect(Collectors.toList()));
     }
 }

@@ -37,4 +37,7 @@ mybatis-plus:
 raggie:
   path: /Users/liujiong/Downloads/vs_code_project/raggie_pic/
 
+mybatis:
+  mapper-locations: classpath:mapper/**Mapper.xml
+
 
