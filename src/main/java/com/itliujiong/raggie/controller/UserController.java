@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.itliujiong.raggie.common.R;
 import com.itliujiong.raggie.common.SMSUtils;
 import com.itliujiong.raggie.entity.User;
+import com.itliujiong.raggie.mapper.UserMapper;
 import com.itliujiong.raggie.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 import java.util.Map;
 import java.util.Random;
@@ -29,6 +31,9 @@ public class UserController {
 
     @Autowired
     private RedisTemplate redisTemplate;
+
+    @Resource
+    private UserMapper userMapper;
 
     @PostMapping("/sendMsg")
     public R<StringBuilder> sendMsg(@RequestBody User user, HttpSession session){
